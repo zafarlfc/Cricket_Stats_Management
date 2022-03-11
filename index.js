@@ -53,3 +53,18 @@ cart[3] = 4;
 console.log(cart);
 
 console.log(cart.length);
+
+
+// Functions
+
+function greetings(name){
+    console.log(name);
+}
+
+greetings("Hello " + "Someone")
+
+function counter(any_number){
+    return any_number + 1;
+}
+
+console.log(counter(5));
