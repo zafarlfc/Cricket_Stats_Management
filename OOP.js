@@ -45,3 +45,10 @@ function GetSquare(number) {
 
 const my_number1 = new GetSquare(4);
 my_number1.square();
+
+
+// Function Object Methods
+
+my_number1.name
+my_number1.length
+my_number1.constructor
