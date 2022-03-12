@@ -17,3 +17,31 @@ Person.get_age();
 
 
 // Polymorphism         (Refactor ugly switch/case statements)
+
+
+// Factory Function
+
+function get_square(number){
+    return {
+        number: number,
+        square: function(){
+            console.log(number * number);
+        }
+    };
+}
+
+const my_number = get_square(4);
+my_number.square();
+
+
+// Constructor Functions
+
+function GetSquare(number) {
+    this.number = number;
+    this.square = function() {
+        console.log(number * number);
+    }
+}
+
+const my_number1 = new GetSquare(4);
+my_number1.square();
