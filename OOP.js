@@ -95,3 +95,38 @@ console.log(keys);
 
 if ("number" in number2)
     console.log("Key number exists!");
+
+
+
+// Getters & Setters
+
+function Square(length) {
+    this.length = length;
+
+    let defaultlengths = {h:1, w:1};
+
+    this.draw = function() {
+        console.log("Draw");
+    }
+
+    Object.defineProperty(this, "defaultlengths", {
+        get: function() {
+            console.log(defaultlengths)
+            return defaultlengths;
+        },
+        
+        set: function(value) {
+            if (!value.h || !value.w)
+                throw new Error("Invalid Input!");
+            
+            defaultlengths = value
+
+            console.log(defaultlengths);
+        }
+    });
+}
+
+const new_value = new Square(1);
+new_value.draw();
+new_value.defaultlengths;
+new_value.defaultlengths = {h:2, w:2};
