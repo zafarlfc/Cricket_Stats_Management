@@ -12,6 +12,23 @@ Person.get_age();
 
 // Abstraction          (Reduce complexity + isolate impact of change)
 
+function Square(length) {
+    this.length = length;
+
+    let defaultlengths = {h:1, w:1};
+
+    let compute_area = function(height) {
+        // ...
+    }
+
+    this.draw = function() {
+        compute_area(1)
+        console.log("Draw");
+    }
+}
+
+const value = new Square(1);
+value.draw();
 
 // Inheritance          (Eliminate redundant code)
 
