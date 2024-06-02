@@ -1,0 +1,10 @@
+.vscode
+
+node_modules
+package-lock.json
+package.json
+my-app
+.npmrc
+
+venv
+__pycache__
