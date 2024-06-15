@@ -8,3 +8,7 @@ my-app
 
 venv
 __pycache__
+
+db.sqlite3
+
+cricket.zip
