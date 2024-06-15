@@ -21,6 +21,7 @@ from my_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', views.home)
-    path('', include("my_app.urls"))
+    path('', views.home),
+    # path('', include("my_app.urls"))
+    path('form/', views.form)
 ]
