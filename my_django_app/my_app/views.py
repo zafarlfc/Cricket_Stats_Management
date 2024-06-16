@@ -15,3 +15,8 @@ def form(request):
     form = DemoForm()
     context = {"form": form}
     return render(request, template_name="form.html", context=context)
+
+
+def languages(request): 
+    langs = ['Python', 'Java', 'PHP', 'Ruby', 'Rust'] 
+    return render(request, 'langs.html', {'langs':langs})
