@@ -1,1 +1,20 @@
 <p>player-detail works!</p>
+<div class="container mt-4" *ngIf="player">
+    <h2>{{player.name}}</h2>
+    <p>{{player.country}}</p>
+    <p>Runs: {{player.runs}}</p>
+    <p>Wickets: {{player.wickets}}</p>
+    <p>⭐ {{player.average_rating}}</p>
+
+    <hr>
+
+    <h4>Add Comment</h4>
+    <textarea [(ngModel)]="commentText" class="form-control"></textarea>
+    <button class="btn btn-success mt-2" (click)="submitComment()">Submit</button>
+
+    <hr>
+
+    <h4>Rate Player</h4>
+    <input type="number" [(ngModel)]="rating" min="1" max="5" class="form-control" />
+    <button class="btn btn-warning mt-2" (click)="submitRating()">Rate</button>
+</div>
