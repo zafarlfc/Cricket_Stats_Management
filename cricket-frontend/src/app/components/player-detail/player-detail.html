@@ -1,10 +1,48 @@
-<p>player-detail works!</p>
-<div class="container mt-4" *ngIf="player">
+<div class="container mt-4">
+    <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>Loading player details...</p>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+        {{ error }}
+        <button class="btn btn-outline-danger btn-sm d-block mt-2" (click)="ngOnInit()">Retry</button>
+    </div>
+
+    <div *ngIf="!loading && !error && player">
     <h2>{{player.name}}</h2>
     <p>{{player.country}}</p>
     <p>Runs: {{player.runs}}</p>
     <p>Wickets: {{player.wickets}}</p>
     <p>⭐ {{player.average_rating}}</p>
+
+    <hr>
+
+    <h4>Comments</h4>
+    <div *ngIf="player.comments?.length === 0">
+        No comments yet
+    </div>
+    <div *ngFor="let comment of player.comments" class="card mb-2">
+        <div class="card-body">
+            <strong>{{comment.user}}</strong>
+            <p>{{comment.text}}</p>
+            <small>{{comment.created_at}}</small>
+        </div>
+    </div>
+
+    <hr>
+    <h4>Ratings</h4>
+    <div *ngIf="player.ratings?.length === 0">
+        No ratings yet
+    </div>
+    <div *ngFor="let rating of player.ratings" class="card mb-2">
+        <div class="card-body">
+            <strong>{{rating.user}}</strong>
+            <p>⭐ {{rating.score}} / 5</p>
+        </div>
+    </div>
 
     <hr>
 
@@ -17,4 +55,5 @@
     <h4>Rate Player</h4>
     <input type="number" [(ngModel)]="rating" min="1" max="5" class="form-control" />
     <button class="btn btn-warning mt-2" (click)="submitRating()">Rate</button>
+    </div>
 </div>
