@@ -38,12 +38,14 @@ export class PlayerDetailComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
           this.player = data;
+          console.log("Loader: ", this.loading);
         },
         error: (err) => {
           this.error = 'Could not load player details. Please try again later.';
           console.error('Error fetching player detail:', err);
         }
       });
+    console.log("Loader: ", this.loading);
   }
 
   submitComment() {
