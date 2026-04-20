@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-player-detail',
@@ -19,7 +18,7 @@ export class PlayerDetailComponent implements OnInit {
   loading = true;
   error: string | null = null;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) { }
+  constructor(private api: ApiService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -33,19 +32,20 @@ export class PlayerDetailComponent implements OnInit {
   loadPlayer(id: number) {
     this.loading = true;
     this.error = null;
-    this.api.getPlayer(id)
-      .pipe(finalize(() => this.loading = false))
-      .subscribe({
-        next: (data: any) => {
-          this.player = data;
-          console.log("Loader: ", this.loading);
-        },
-        error: (err) => {
-          this.error = 'Could not load player details. Please try again later.';
-          console.error('Error fetching player detail:', err);
-        }
-      });
-    console.log("Loader: ", this.loading);
+    this.api.getPlayer(id).subscribe({
+      next: (data: any) => {
+        console.log('SUCCESS', data);
+        this.player = data;
+        this.loading = false;
+        this.cdr.detectChanges();   // ✅ IMPORTANT
+      },
+      error: (err) => {
+        console.error(err);
+        this.error = 'Could not load player details.';
+        this.loading = false;
+        this.cdr.detectChanges();   // ✅ IMPORTANT
+      }
+    });
   }
 
   submitComment() {
